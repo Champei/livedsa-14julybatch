@@ -37,9 +37,19 @@ public:
 		}
 	}
 
-	void DFS(string src) {
+	void DFS() {
 		unordered_map<string, bool> visited;
-		dfsHelper("1", visited);
+		int components = 0;
+
+		for (auto p : adj) {
+			if (!visited[p.first]) {
+				dfsHelper(p.first, visited);
+				components++;
+			}
+		}
+
+
+		cout << "\nComponents: " << components << endl;
 	}
 };
 
@@ -56,13 +66,7 @@ int main() {
 	g.addEdge("3", "5");
 	g.addEdge("6", "7");
 
-	/*
-	// This is a tedious way of doing this passing visited hashmap manually
-	unordered_map<string, bool> visited;
-	g.DFS("1", visited);
-	*/
-
-	g.DFS("1");
+	g.DFS();
 
 
 	return 0;
